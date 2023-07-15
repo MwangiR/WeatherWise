@@ -16,7 +16,7 @@
 <body>
     <header>
         <div data-sticky-container>
-            <div class="title-bar" data-sticky data-top-anchor="1" data-btm-anchor="content:bottom">
+            <div class="title-bar" data-options="marginTop:0;" data-top-anchor="1" data-btm-anchor="content:bottom">
                 <div class="title-bar-left">Weather App</div>
             </div>
         </div>
@@ -26,21 +26,21 @@
         <section id="weatherAppContainer">
             <aside class="showContainer">
                 <div id="searchContainer">
-                    <h2>Search</h2>
-                    <form>
-                        <div class="input-group weatherInput">
-                            <span class="label">City</span>
-                            <input class="input-group-field" id="cityInput" type="text">
-                            <div class="input-group-button">
-                                <input type="submit" class="button" value="Submit">
-                            </div>
-                        </div>
-                    </form>
+                    <div class="weatherInput">
+                        <label for="cityInput" id="cityLabel">Search for City:</label>
+                        <input class="input-group-field" id="cityInput" type="text">
+                        <button class="hollow button expanded searchBtn">Search City</button>
+                    </div>
                 </div>
-                <div class="savedCities"></div>
+                <div class="savedCities">
+                    <h2>History</h2>
+                    <div id="previousHistory">
+                    </div>
+                </div>
             </aside>
             <article class="interactiveContainer">
                 <h2>Weather</h2>
+                <h5 id="loadedCity"></h5>
                 <div id="currentDay">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum dolor necessitatibus labore
                     possimus consequatur quae voluptatem reiciendis natus perspiciatis perferendis qui debitis tempora

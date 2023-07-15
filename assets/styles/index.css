@@ -35,8 +35,24 @@ body {
   border: 5px solid darkblue;
 }
 
-.weatherInput {
+.weatherInput,
+#previousHistory {
   padding: 0 5%;
+}
+
+#cityLabel {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.searchBtn {
+  margin-top: 10px;
+}
+
+.searchBtn:hover {
+  cursor: pointer;
+  background-color: darkblue !important;
+  color: white !important;
 }
 
 #currentDay {
