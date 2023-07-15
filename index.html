@@ -40,29 +40,26 @@
             </aside>
             <article class="interactiveContainer">
                 <h2>Weather</h2>
-                <h5 id="loadedCity"></h5>
+
                 <div id="currentDay">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum dolor necessitatibus labore
-                    possimus consequatur quae voluptatem reiciendis natus perspiciatis perferendis qui debitis tempora
-                    quasi nulla, sapiente deserunt velit doloremque amet?
-                    Similique saepe nulla odio nisi molestias at, deleniti quae, quisquam error obcaecati sed minus.
-                    Unde accusantium nobis reprehenderit in! Quo amet labore corporis illo voluptates at est molestiae,
-                    tempora facilis!
-                    Quas atque quae minus at excepturi recusandae praesentium nemo accusantium, error earum maiores
-                    expedita sequi sint ab. Maiores laboriosam libero vero magni ipsum cumque, consequuntur animi unde
-                    possimus saepe aperiam.
+                    <h5 id="loadedCity"></h5>
+
+                    <div class="forecastDetails">
+                        <label>Temparature</label>
+                        <p id="showTemp"></p>
+                    </div>
+                    <div class="forecastDetails">
+                        <label>Wind</label>
+                        <p id="showWind"></p>
+                    </div>
+                    <div class="forecastDetails">
+                        <label>Humidity</label>
+                        <p id="showHumidity"></p>
+                    </div>
+
                 </div>
                 <div id="fiveDay">
-                    <div class="card dayCard">
-                        <div class="card-divider">
-                            Date Display
-                        </div>
-                        <img src="assets/img/generic/rectangle-1.jpg" alt="weather image">
-                        <div class="card-section">
-                            <h4>This is a card.</h4>
-                            <p>It has an easy to override visual style, and is appropriately subdued.</p>
-                        </div>
-                    </div>
+
                 </div>
             </article>
         </section>
@@ -70,6 +67,8 @@
 
 
     <!-- Compressed JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js"

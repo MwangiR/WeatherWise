@@ -3,7 +3,6 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -58,13 +57,16 @@ body {
 #currentDay {
   border: 2px solid black;
   margin: 0 5%;
+  text-align: left;
 }
 
 #fiveDay {
   margin-top: 20px;
   padding: 0 5%;
+  display: flex;
 }
 
 .dayCard {
-  width: 300px;
+  width: 200px;
+  margin: 0 10px 5px 5px;
 }
