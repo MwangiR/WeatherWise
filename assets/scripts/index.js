@@ -137,8 +137,9 @@ function forecast(cityName) {
         const tempContainer = document.createElement("div");
         tempContainer.setAttribute("class", "forecastDetails");
         const tempLabel = document.createElement("label");
-        tempLabel.innerHTML = `${day.main.temp} \u2109`;
+        tempLabel.textContent = "Temp: ";
         const tempValue = document.createElement("p");
+        tempValue.innerHTML = `${day.main.temp} \u2109`;
         tempValue.setAttribute("id", "showTemp");
         tempContainer.appendChild(tempLabel);
         tempContainer.appendChild(tempValue);
@@ -147,8 +148,9 @@ function forecast(cityName) {
         const windContainer = document.createElement("div");
         windContainer.setAttribute("class", "forecastDetails");
         const windLabel = document.createElement("label");
-        windLabel.textContent = `${day.wind.speed} MPH`;
+        windLabel.textContent = "Wind Speed: ";
         const windValue = document.createElement("p");
+        windValue.textContent = `${day.wind.speed} MPH`;
         windValue.setAttribute("id", "showWind");
         windContainer.appendChild(windLabel);
         windContainer.appendChild(windValue);
@@ -157,8 +159,9 @@ function forecast(cityName) {
         const humidityContainer = document.createElement("div");
         humidityContainer.setAttribute("class", "forecastDetails");
         const humidityLabel = document.createElement("label");
-        humidityLabel.textContent = `${day.main.humidity}%`;
+        humidityLabel.textContent = "Humidity";
         const humidityValue = document.createElement("p");
+        humidityValue.innerHTML = `${day.main.humidity}%`;
         humidityValue.setAttribute("id", "showHumidity");
         humidityContainer.appendChild(humidityLabel);
         humidityContainer.appendChild(humidityValue);
@@ -175,7 +178,7 @@ function forecast(cityName) {
 searchBtnEL.addEventListener("click", (e) => {
   e.preventDefault();
 
-  const regex = /^[A-Za-z]+$/;
+  const regex = /^[A-Za-z]+(\s[A-Za-z]+)*$/;
 
   if (!regex.test(searchInputEL.value)) {
     alert("Please enter a valid city");
@@ -188,8 +191,6 @@ searchBtnEL.addEventListener("click", (e) => {
     loadFromLocal();
   }
 });
-
-console.log(searchBtnEL);
 
 //initalize foundation css
 Foundation.addToJquery($);
