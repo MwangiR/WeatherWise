@@ -80,6 +80,7 @@ function loadFromLocal() {
 function forecast(cityName) {
   const params = new URLSearchParams({
     q: cityName,
+    cnt: 50,
     appid: "063fb6a108a3f5a1d0f814a991c1d527",
   });
 
@@ -90,10 +91,20 @@ function forecast(cityName) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      console.log("Forecast data: ", data);
       const forecastDays = data.list;
 
-      forecastDays.slice(0, 5).forEach((day) => {
+      const dates = new Set();
+      const filteredDays = forecastDays.filter((day) => {
+        const date = day.dt_txt.split(" ")[0];
+        if (!dates.has(date)) {
+          dates.add(date);
+          return true;
+        }
+        return false;
+      });
+
+      filteredDays.slice(1, 6).forEach((day, index) => {
         const cardContainer = document.createElement("div");
         cardContainer.setAttribute("class", "card dayCard");
         fiveDayEl.appendChild(cardContainer);
