@@ -6,6 +6,7 @@ loadFromLocal();
 function weatherAPI(cityName) {
   const params = new URLSearchParams({
     q: cityName,
+    units: "metric",
     appid: "063fb6a108a3f5a1d0f814a991c1d527",
   });
 
@@ -16,17 +17,27 @@ function weatherAPI(cityName) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      console.log("Search data: ", data);
 
       const showCity = document.querySelector("#loadedCity");
       const showTempEl = document.querySelector("#showTemp");
       const showWindEl = document.querySelector("#showWind");
       const showHumidityEl = document.querySelector("#showHumidity");
+      const imgContainer = document.querySelector("#imageSection img");
+      imgContainer.setAttribute(
+        "src",
+        `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+      );
+      imgContainer.setAttribute("data-tooltip", "");
+      imgContainer.setAttribute("tabindex", "1");
+      imgContainer.setAttribute("data-position", "bottom");
+      imgContainer.setAttribute("alt", data.weather[0].description);
+      imgContainer.setAttribute("title", data.weather[0].description);
 
       showCity.textContent = data.name;
-      showTempEl.innerHTML = `${data.main.temp} \u2109`;
-      showWindEl.innerHTML = `${data.wind.speed} MPH`;
-      showHumidityEl.innerHTML = `${data.main.humidity}%`;
+      showTempEl.innerHTML = `Temparature: ${data.main.temp} \u2103`;
+      showWindEl.innerHTML = `Wind Speed: ${data.wind.speed} MPH`;
+      showHumidityEl.innerHTML = `Humidity: ${data.main.humidity}%`;
     })
     .catch((error) => {
       console.error(error);
@@ -80,7 +91,8 @@ function loadFromLocal() {
 function forecast(cityName) {
   const params = new URLSearchParams({
     q: cityName,
-    cnt: 50,
+    units: "metric",
+    exclude: "current,minutely,hourly,alerts",
     appid: "063fb6a108a3f5a1d0f814a991c1d527",
   });
 
@@ -95,16 +107,23 @@ function forecast(cityName) {
       const forecastDays = data.list;
 
       const dates = new Set();
+      const currentDate = new Date().toISOString().split("T")[0];
+      let isFollowingDate = false;
+
       const filteredDays = forecastDays.filter((day) => {
         const date = day.dt_txt.split(" ")[0];
-        if (!dates.has(date)) {
+        if (date === currentDate) {
+          isFollowingDate = true;
+          return false;
+        }
+        if (isFollowingDate && !dates.has(date)) {
           dates.add(date);
           return true;
         }
         return false;
       });
 
-      filteredDays.slice(1, 6).forEach((day, index) => {
+      filteredDays.slice(0, 5).forEach((day, index) => {
         const cardContainer = document.createElement("div");
         cardContainer.setAttribute("class", "card dayCard");
         fiveDayEl.appendChild(cardContainer);
@@ -139,7 +158,7 @@ function forecast(cityName) {
         const tempLabel = document.createElement("label");
         tempLabel.textContent = "Temp: ";
         const tempValue = document.createElement("p");
-        tempValue.innerHTML = `${day.main.temp} \u2109`;
+        tempValue.innerHTML = `${day.main.temp} \u2103`;
         tempValue.setAttribute("id", "showTemp");
         tempContainer.appendChild(tempLabel);
         tempContainer.appendChild(tempValue);
