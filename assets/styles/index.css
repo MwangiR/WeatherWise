@@ -22,17 +22,17 @@ body {
 
 #weatherAppContainer {
   display: flex;
-  margin: 2% 5%;
+  /* margin: 2% 5%; */
 }
 
 .showContainer {
-  border: 5px solid black;
+  /* border: 5px solid black; */
   flex: 1 1 30%;
 }
 
 .interactiveContainer {
   flex: 1 0 60%;
-  border: 5px solid darkblue;
+  /* border: 5px solid darkblue; */
 }
 
 .weatherInput,
@@ -56,9 +56,12 @@ body {
 }
 
 #currentDay {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin: 0 5%;
   text-align: left;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 #fiveDay {
@@ -70,4 +73,31 @@ body {
 .dayCard {
   flex: 1 1 30%;
   margin: 0 10px 5px 5px;
+}
+
+@media (max-width: 800px) {
+  #fiveDay {
+    flex-direction: column;
+  }
+  #weatherAppContainer {
+    flex-direction: column;
+  }
+  #currentDay {
+    flex-direction: column;
+  }
+
+  .card-divider {
+    width: 100%;
+    text-align: center;
+  }
+  .dayCard {
+    flex: 1 1 20%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+  }
+  .dayCard img {
+    width: 300px;
+    height: 300px;
+  }
 }
