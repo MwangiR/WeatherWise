@@ -51,11 +51,6 @@ function weatherAPI(cityName) {
 function saveToLocal() {
   const searchedCity = searchInputEL.value;
 
-  if (loadedCode === "404") {
-    showMessage(loadedCode, "City not found");
-    return;
-  }
-
   let savedCities = localStorage.getItem("searchedCity", searchedCity);
 
   if (savedCities) {
