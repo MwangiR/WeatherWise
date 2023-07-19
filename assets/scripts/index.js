@@ -59,15 +59,19 @@ function weatherAPI(cityName) {
     .then((data) => {
       console.log("Search data: ", data);
 
+      showMessage(data.cod, data.message);
+
       const showCity = document.querySelector("#loadedCity");
       const showTempEl = document.querySelector("#showTemp");
       const showWindEl = document.querySelector("#showWind");
       const showHumidityEl = document.querySelector("#showHumidity");
       const imgContainer = document.querySelector("#imageSection img");
+      imgContainer.classList.add("thumbnail");
       imgContainer.setAttribute(
         "src",
         `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
       );
+      imgContainer.setAttribute("class", "card-img");
       imgContainer.setAttribute("data-tooltip", "");
       imgContainer.setAttribute("tabindex", "1");
       imgContainer.setAttribute("data-position", "bottom");
@@ -86,6 +90,7 @@ function weatherAPI(cityName) {
 
 function saveToLocal() {
   const searchedCity = searchInputEL.value;
+
   let savedCities = localStorage.getItem("searchedCity", searchedCity);
 
   if (savedCities) {
@@ -128,6 +133,17 @@ function loadFromLocal() {
   });
 }
 
+function showMessage(loadedCode, loadedData) {
+  if (loadedCode === "404") {
+    const calloutContainer = document.createElement("div");
+    calloutContainer.setAttribute("class", "callout");
+    calloutContainer.classList.add("alert");
+    calloutContainer.textContent = loadedData;
+    document.querySelector("main").prepend(calloutContainer);
+  }
+  return;
+}
+
 function forecast(cityName) {
   const params = new URLSearchParams({
     q: cityName,
@@ -145,6 +161,7 @@ function forecast(cityName) {
     })
     .then((data) => {
       console.log("Forecast data: ", data);
+
       const forecastDays = data.list;
 
       const currentDate = new Date();
@@ -155,6 +172,8 @@ function forecast(cityName) {
       });
 
       const filteredForecast = daystoDisplay.filter((_, index) => index % 8 === 0);
+
+      showMessage(data.cod);
 
       filteredForecast.slice(0, 5).forEach((day) => {
         const cardContainer = document.createElement("div");
@@ -170,6 +189,7 @@ function forecast(cityName) {
         cardContainer.appendChild(cardDivider);
 
         const imgContainer = document.createElement("img");
+        imgContainer.classList.add("thumbnail");
         imgContainer.setAttribute(
           "src",
           `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`,
