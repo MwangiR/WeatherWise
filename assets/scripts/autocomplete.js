@@ -1,3 +1,5 @@
+//function to autocomplete cities
+
 $(document).ready(function () {
   $("#cityInput").autocomplete({
     source: function (request, response) {
