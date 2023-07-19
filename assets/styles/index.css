@@ -75,6 +75,15 @@ body {
   margin: 0 10px 5px 5px;
 }
 
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+#autocompleteResults ul {
+  list-style-type: none;
+  cursor: pointer;
+}
+
 @media (max-width: 800px) {
   #fiveDay {
     flex-direction: column;
