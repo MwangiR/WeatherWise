@@ -1,6 +1,6 @@
 const searchBtnEL = document.querySelector(".searchBtn");
 const searchInputEL = document.querySelector("#cityInput");
-const fiveDayEl = document.querySelector("#fiveDay");
+const fiveDayEl = document.querySelector(".fiveDay");
 
 loadFromLocal();
 
@@ -131,6 +131,7 @@ function loadFromLocal() {
 function forecast(cityName) {
   const params = new URLSearchParams({
     q: cityName,
+    cnt: 40,
     units: "metric",
     exclude: "current,minutely,hourly,alerts",
     appid: "063fb6a108a3f5a1d0f814a991c1d527",
@@ -146,24 +147,16 @@ function forecast(cityName) {
       console.log("Forecast data: ", data);
       const forecastDays = data.list;
 
-      const dates = new Set();
-      const currentDate = new Date().toISOString().split("T")[0];
-      let isFollowingDate = false;
+      const currentDate = new Date();
 
-      const filteredDays = forecastDays.filter((day) => {
-        const date = day.dt_txt.split(" ")[0];
-        if (date === currentDate) {
-          isFollowingDate = true;
-          return false;
-        }
-        if (isFollowingDate && !dates.has(date)) {
-          dates.add(date);
-          return true;
-        }
-        return false;
+      const daystoDisplay = forecastDays.filter((entry) => {
+        const entryDate = new Date(entry.dt_txt);
+        return entryDate > currentDate;
       });
 
-      filteredDays.slice(0, 5).forEach((day, index) => {
+      const filteredForecast = daystoDisplay.filter((_, index) => index % 8 === 0);
+
+      filteredForecast.slice(0, 5).forEach((day) => {
         const cardContainer = document.createElement("div");
         cardContainer.setAttribute("class", "card dayCard");
         fiveDayEl.appendChild(cardContainer);
@@ -172,6 +165,7 @@ function forecast(cityName) {
         cardDivider.setAttribute("class", "card-divider");
         const dt_txt = day.dt_txt;
         const dateWithoutTime = dt_txt.substring(0, 10);
+        //const dateWithoutTime = dt_txt;
         cardDivider.textContent = dateWithoutTime;
         cardContainer.appendChild(cardDivider);
 
