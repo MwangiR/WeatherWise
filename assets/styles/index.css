@@ -85,7 +85,7 @@ body {
 }
 
 @media (max-width: 800px) {
-  #fiveDay {
+  .fiveDay {
     flex-direction: column;
   }
   #weatherAppContainer {
