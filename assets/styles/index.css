@@ -8,8 +8,8 @@ body {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  color: #333;
-  background-color: #fff;
+  color: #f1f1f1;
+  background-color: #121420;
   text-align: center;
   scroll-behavior: smooth;
   box-sizing: border-box;
@@ -48,6 +48,7 @@ body {
 #cityLabel {
   font-weight: bold;
   font-size: larger;
+  color: #f1f1f1;
 }
 
 .searchBtn {
@@ -56,8 +57,6 @@ body {
 
 .searchBtn:hover {
   cursor: pointer;
-  background-color: darkblue !important;
-  color: white !important;
 }
 
 #currentDay {
