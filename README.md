@@ -14,6 +14,7 @@ This project uses the following technologies and libraries:
 
 - [OpenWeatherMap API](https://openweathermap.org/api): Provides weather data for various cities.
 - [Foundation](https://get.foundation/): A responsive front-end framework for building user interfaces.
+- [jQuery UI Autocomplete](https://jqueryui.com/autocomplete/): Enables autocomplete functionality for city names.
 
 ## API Key
 
@@ -38,6 +39,8 @@ To make API requests to OpenWeatherMap, the app uses an API key that you need to
 8. `searchBtnEL.addEventListener("click", (e) => { ... })`: This event listener is attached to the search button element (`searchBtnEL`). When the button is clicked, it triggers the weather search process and updates the UI with the current weather and forecast.
 
 9. `Foundation.addToJquery($)` and `$(document).foundation()`: These lines initialize the Foundation CSS framework and add some extra functionality to jQuery, enabling the use of Foundation's responsive styles and features.
+
+10. `$(document).ready(function () { ... })`: This function enables autocomplete functionality for the city input field using jQuery UI Autocomplete. It makes an AJAX request to fetch city data from the [all-countries-and-cities-json](https://github.com/russ666/all-countries-and-cities-json) repository on GitHub. As the user types in the input field, it filters the matching cities and displays them as autocomplete suggestions. When the user selects a city from the autocomplete list, it populates the input field with the selected city name.
 
 ## Contributing
 
