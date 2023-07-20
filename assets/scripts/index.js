@@ -4,45 +4,6 @@ const fiveDayEl = document.querySelector(".fiveDay");
 
 loadFromLocal();
 
-//function to autocomplete cities
-
-// $(document).ready(function () {
-//   $("#cityInput").autocomplete({
-//     source: function (request, response) {
-//       $.ajax({
-//         url: "https://raw.githubusercontent.com/russ666/all-countries-and-cities-json/master/countries.json",
-//         dataType: "json",
-//         success: function (data) {
-//           var term = request.term.toLowerCase();
-//           var matchingCities = [];
-
-//           for (var country in data) {
-//             if (data.hasOwnProperty(country)) {
-//               var cities = data[country];
-//               var matchingCitiesInCountry = cities.filter(function (city) {
-//                 return city.toLowerCase().startsWith(term);
-//               });
-
-//               matchingCities = matchingCities.concat(matchingCitiesInCountry);
-//             }
-//           }
-
-//           response(matchingCities);
-//         },
-//       });
-//     },
-//     minLength: 3, // Set the minimum number of characters required to trigger the autocomplete
-//     appendTo: "#autocompleteResults",
-//     select: function (event, ui) {},
-//     _renderItem: function (ul, item) {
-//       return $("<li>")
-//         .attr({ "data-value": item.value, class: "list-group-item" })
-//         .append(item.label)
-//         .appendTo(ul);
-//     }, // Replace with the ID or selector of the container where you want to append the suggestions list
-//   });
-// });
-
 function weatherAPI(cityName) {
   const params = new URLSearchParams({
     q: cityName,
@@ -164,14 +125,18 @@ function forecast(cityName) {
 
       const forecastDays = data.list;
 
-      const currentDate = new Date();
+      const currentDate = new Date().toISOString().substring(0, 10);
+      const uniqueDates = new Set();
+      const filteredForecast = [];
 
-      const daystoDisplay = forecastDays.filter((entry) => {
-        const entryDate = new Date(entry.dt_txt);
-        return entryDate > currentDate;
+      forecastDays.forEach((entry) => {
+        const entryDate = entry.dt_txt.substring(0, 10);
+        if (entryDate === currentDate || uniqueDates.has(entryDate)) {
+          return; // Skip the current day and duplicates
+        }
+        uniqueDates.add(entryDate);
+        filteredForecast.push(entry);
       });
-
-      const filteredForecast = daystoDisplay.filter((_, index) => index % 8 === 0);
 
       showMessage(data.cod);
 
