@@ -48,7 +48,7 @@ To make API requests to OpenWeatherMap, the app uses an API key that you need to
 
 ## Screenshots
 
-![WeatherWise](./assets/images/screenshot.png)
+![WeatherWise](./assets/images/weatherwise1.png)
 
 ## Contributing
 
