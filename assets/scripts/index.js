@@ -23,7 +23,8 @@ function weatherAPI(cityName) {
       const elemenetToShow = showMessage(data.cod, data.message);
       removeElement(elemenetToShow, 3000);
 
-      const showCity = document.querySelector("#loadedCity");
+      const showCity = document.querySelector("#cityName");
+      const showDate = document.querySelector("#date");
       const showTempEl = document.querySelector("#showTemp");
       const showWindEl = document.querySelector("#showWind");
       const showHumidityEl = document.querySelector("#showHumidity");
@@ -41,6 +42,7 @@ function weatherAPI(cityName) {
       imgContainer.setAttribute("title", data.weather[0].description);
 
       showCity.textContent = data.name;
+      showDate.textContent = unixToDate(data.dt);
       showTempEl.innerHTML = `Temparature: ${data.main.temp} \u2103`;
       showWindEl.innerHTML = `Wind Speed: ${data.wind.speed} MPH`;
       showHumidityEl.innerHTML = `Humidity: ${data.main.humidity}%`;
@@ -87,7 +89,7 @@ function loadFromLocal() {
 
     aEl.addEventListener("click", (e) => {
       e.preventDefault();
-      document.querySelector("#loadedCity").textContent = city;
+      document.querySelector("#cityName").textContent = city;
       weatherAPI(city);
       fiveDayEl.innerHTML = "";
       forecast(city);
@@ -105,6 +107,14 @@ function showMessage(loadedCode, loadedData) {
     return calloutContainer;
   }
   return null;
+}
+
+function unixToDate(unixTimestamp) {
+  const date = new Date(unixTimestamp * 1000); // Convert Unix timestamp to milliseconds
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-based
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function removeElement(element, delay) {
