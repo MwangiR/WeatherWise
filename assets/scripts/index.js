@@ -20,7 +20,8 @@ function weatherAPI(cityName) {
     .then((data) => {
       console.log("Search data: ", data);
 
-      showMessage(data.cod, data.message);
+      const elemenetToShow = showMessage(data.cod, data.message);
+      removeElement(elemenetToShow, 3000);
 
       const showCity = document.querySelector("#loadedCity");
       const showTempEl = document.querySelector("#showTemp");
@@ -101,8 +102,17 @@ function showMessage(loadedCode, loadedData) {
     calloutContainer.classList.add("alert");
     calloutContainer.textContent = loadedData;
     document.querySelector("main").prepend(calloutContainer);
+    return calloutContainer;
   }
-  return;
+  return null;
+}
+
+function removeElement(element, delay) {
+  setTimeout(() => {
+    if (element) {
+      element.remove();
+    }
+  }, delay);
 }
 
 function forecast(cityName) {
@@ -131,14 +141,11 @@ function forecast(cityName) {
 
       forecastDays.forEach((entry) => {
         const entryDate = entry.dt_txt.substring(0, 10);
-        if (entryDate === currentDate || uniqueDates.has(entryDate)) {
-          return; // Skip the current day and duplicates
+        if (entryDate !== currentDate && !uniqueDates.has(entryDate)) {
+          uniqueDates.add(entryDate);
+          filteredForecast.push(entry);
         }
-        uniqueDates.add(entryDate);
-        filteredForecast.push(entry);
       });
-
-      showMessage(data.cod);
 
       filteredForecast.slice(0, 5).forEach((day) => {
         const cardContainer = document.createElement("div");

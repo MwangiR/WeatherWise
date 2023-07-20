@@ -17,7 +17,13 @@ $(document).ready(function () {
                 return city.toLowerCase().startsWith(term);
               });
 
-              matchingCities = matchingCities.concat(matchingCitiesInCountry);
+              var formattedCities = matchingCitiesInCountry.map(function (city) {
+                return {
+                  label: city + ", " + country,
+                  value: city,
+                };
+              });
+              matchingCities = matchingCities.concat(formattedCities);
             }
           }
 
@@ -27,12 +33,15 @@ $(document).ready(function () {
     },
     minLength: 3, // Set the minimum number of characters required to trigger the autocomplete
     appendTo: "#autocompleteResults",
-    select: function (event, ui) {},
+    select: function (event, ui) {
+      $("#cityInput").val(ui.item.value);
+      return false;
+    },
     _renderItem: function (ul, item) {
       return $("<li>")
         .attr({ "data-value": item.value, class: "list-group-item" })
         .append(item.label)
         .appendTo(ul);
-    }, // Replace with the ID or selector of the container where you want to append the suggestions list
+    },
   });
 });
