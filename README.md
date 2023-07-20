@@ -1,6 +1,10 @@
-# Weather App
+# WeatherWise
 
 This is a simple weather application that allows users to search for the weather details of a city. The app fetches data from the OpenWeatherMap API to display current weather information and a five-day forecast.
+
+## Link
+
+[WeatherWise](https://mwangir.github.io/WeatherWise/)
 
 ## Features
 
@@ -41,6 +45,10 @@ To make API requests to OpenWeatherMap, the app uses an API key that you need to
 9. `Foundation.addToJquery($)` and `$(document).foundation()`: These lines initialize the Foundation CSS framework and add some extra functionality to jQuery, enabling the use of Foundation's responsive styles and features.
 
 10. `$(document).ready(function () { ... })`: This function enables autocomplete functionality for the city input field using jQuery UI Autocomplete. It makes an AJAX request to fetch city data from the [all-countries-and-cities-json](https://github.com/russ666/all-countries-and-cities-json) repository on GitHub. As the user types in the input field, it filters the matching cities and displays them as autocomplete suggestions. When the user selects a city from the autocomplete list, it populates the input field with the selected city name.
+
+## Screenshots
+
+![WeatherWise](./assets/images/mwangir.github.io_WeatherWise_.png)
 
 ## Contributing
 
